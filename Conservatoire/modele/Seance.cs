@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Conservatoire.modele
 {
-    internal class Seance
+    public class Seance
     {
         private int idProf;
+        private int numSeance;
         private string tranche;
         private string jour;
         private int niveau;
@@ -28,6 +29,6 @@ namespace Conservatoire.modele
         {
             get => ("IdProf : " + this.idProf + " NumSeance: " + this.NumSeance + " Tranche: " + this.tranche + " Jour: " + this.jour + " Niveau: " + this.niveau + " Capacité: " + this.capacite);
         }
-        public int NumSeance { get; set; }
+        public int NumSeance { get => numSeance; set => numSeance = value; }
     }
 }

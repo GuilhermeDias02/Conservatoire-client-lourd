@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Conservatoire.DAL
 {
-    internal class ProfDAO : PersonneDAO
+    public class ProfDAO : PersonneDAO
     {
 
 
@@ -92,6 +92,65 @@ namespace Conservatoire.DAL
 
                 throw (emp);
 
+            }
+
+
+        }
+
+
+        public static void insertProf(int unId, Prof p)
+        {
+
+            try
+            {
+
+                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+
+                maConnexionSql.openConnection();
+
+                Ocom = maConnexionSql.reqExec("INSERT INTO prof (idprof, instrument, salaire) VALUES ('" + unId + "', '" + p.Instrument + "', '"+ p.Salaire +"')");
+
+                int i = Ocom.ExecuteNonQuery();
+
+                maConnexionSql.closeConnection();
+
+            }
+
+            catch (Exception emp)
+            {
+
+                throw (emp);
+            }
+
+        }
+
+        public static void deleteProf(int unId)
+        {
+
+            try
+            {
+
+                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+
+                maConnexionSql.openConnection();
+
+                Ocom = maConnexionSql.reqExec("DELETE FROM prof WHERE idprof = " + unId);
+
+
+                int i = Ocom.ExecuteNonQuery();
+
+
+
+                maConnexionSql.closeConnection();
+
+
+
+            }
+
+            catch (Exception emp)
+            {
+
+                throw (emp);
             }
 
 

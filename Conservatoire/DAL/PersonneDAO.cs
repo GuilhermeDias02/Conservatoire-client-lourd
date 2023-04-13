@@ -9,7 +9,7 @@ using Conservatoire.modele;
 
 namespace Conservatoire.DAL
 {
-    internal class PersonneDAO
+    public class PersonneDAO
     {
 
         // attributs de connexion statiques
@@ -89,6 +89,153 @@ namespace Conservatoire.DAL
 
                 throw (emp);
 
+            }
+        }
+
+        public static void insertPersonne(Personnes p)
+        {
+
+            try
+            {
+
+
+                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+
+
+                maConnexionSql.openConnection();
+
+
+                Ocom = maConnexionSql.reqExec("INSERT INTO personne(nom, prenom, tel, mail, adresse) VALUES ("+ p.Nom +"', '"+ p.Prenom +"', '"+ p.Tel +"', '"+ p.Mail +"', '"+ p.Adresse +"')");
+
+
+                int i = Ocom.ExecuteNonQuery();
+
+
+
+                maConnexionSql.closeConnection();
+
+
+
+            }
+
+            catch (Exception emp)
+            {
+
+                throw (emp);
+            }
+        }
+
+        public static void insertPersonne(Prof p)
+        {
+
+            try
+            {
+
+
+                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+
+
+                maConnexionSql.openConnection();
+
+
+                Ocom = maConnexionSql.reqExec("INSERT INTO personne (nom, prenom, tel, mail, adresse) VALUES ('"+ p.Nom +"', '"+ p.Prenom +"', '"+ p.Tel +"', '"+ p.Mail +"', '"+ p.Adresse +"')");
+
+
+                int i = Ocom.ExecuteNonQuery();
+
+
+
+                maConnexionSql.closeConnection();
+
+
+
+            }
+
+            catch (Exception emp)
+            {
+
+                throw (emp);
+            }
+
+
+        }
+
+        public static int getLastId()
+        {
+
+            try
+            {
+
+                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+
+
+                maConnexionSql.openConnection();
+
+
+                //Ocom = maConnexionSql.reqExec("SELECT LAST_INSERT_ID(ID) from personne order by LAST_INSERT_ID(ID) desc limit 1;");
+                Ocom = maConnexionSql.reqExec("select * from personne");
+
+                MySqlDataReader reader = Ocom.ExecuteReader();
+
+                int id = 0;
+
+
+
+
+                while (reader.Read())
+                {
+
+                    id = (int)reader.GetValue(0);
+
+                }
+
+
+
+                reader.Close();
+
+                maConnexionSql.closeConnection();
+
+                // Envoi de la liste au Manager
+                return (id);
+
+
+            }
+
+            catch (Exception emp)
+            {
+
+                throw (emp);
+
+            }
+        }
+
+        public static void deletePersonne(int unId)
+        {
+
+            try
+            {
+
+                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+
+                maConnexionSql.openConnection();
+
+                Ocom = maConnexionSql.reqExec("DELETE FROM personne WHERE id = " + unId);
+
+
+                int i = Ocom.ExecuteNonQuery();
+
+
+
+                maConnexionSql.closeConnection();
+
+
+
+            }
+
+            catch (Exception emp)
+            {
+
+                throw (emp);
             }
 
 

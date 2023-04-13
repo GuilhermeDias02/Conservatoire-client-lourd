@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Conservatoire.modele
 {
-    internal class Instrument
+    public class Instrument
     {
         private string libelle;
 

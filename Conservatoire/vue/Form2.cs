@@ -52,5 +52,20 @@ namespace Conservatoire.vue
 
             form3.ShowDialog();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Prof unProf = (Prof)listBox1.SelectedItem;
+
+            Form4 form4 = new Form4(unProf);
+            form4.ShowDialog();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            lProfs = monManager.chargementProfsBD();
+
+            affiche();
+        }
     }
 }

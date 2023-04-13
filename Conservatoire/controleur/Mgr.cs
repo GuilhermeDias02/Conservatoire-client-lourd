@@ -9,29 +9,21 @@ using System.Drawing.Text;
 
 namespace Conservatoire.controleur
 {
-    internal class Mgr
+    public class Mgr
     {
-        private PersonneDAO persDAO;
-        private ProfDAO profDAO;
-        private SeanceDAO seanceDAO;
-        private EleveDAO eleveDAO;
-
         private List<Personnes> maListePersonnes;
         private List<Prof> maListeProfs;
         private List<Seance> maListeSeances;
         private List<Eleve> maListeEleves;
+        private List<string> maListeInstruments;
 
         public Mgr()
         {
-            persDAO = new PersonneDAO();
-            profDAO = new ProfDAO();
-            seanceDAO = new SeanceDAO();
-            eleveDAO = new EleveDAO();
-
             maListePersonnes = new List<Personnes>();
             maListeProfs = new List<Prof>();
             maListeSeances = new List<Seance>();
             maListeEleves = new List<Eleve>();
+            maListeInstruments = new List<string>();
         }
 
 
@@ -71,6 +63,27 @@ namespace Conservatoire.controleur
             maListeEleves = EleveDAO.getElevesInscrits(unNumSeance);
 
             return (maListeEleves);
+        }
+
+        public List<string> chargementInstruments()
+        {
+            maListeInstruments = InstrumentDAO.getInstruments();
+
+            return (maListeInstruments);
+        }
+
+        public void ajoutProf(Prof unProf)
+        {
+            PersonneDAO.insertPersonne(unProf);
+
+            ProfDAO.insertProf(PersonneDAO.getLastId(), unProf);
+        }
+
+        public void suppProf(Prof unProf)
+        {
+            ProfDAO.deleteProf(unProf.Id);
+
+            PersonneDAO.deletePersonne(unProf.Id);
         }
     }
 }

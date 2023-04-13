@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Conservatoire
 {
-    internal static class Program
+    public static class Program
     {
         /// <summary>
         /// Point d'entrée principal de l'application.

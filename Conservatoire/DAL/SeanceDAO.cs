@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Conservatoire.DAL
 {
-    internal class SeanceDAO
+    public class SeanceDAO
     {
         // attributs de connexion statiques
         private static string provider = "localhost";

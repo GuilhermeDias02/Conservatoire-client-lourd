@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Conservatoire.DAL
 {
-    internal class EleveDAO
+    public class EleveDAO
     {
         // attributs de connexion statiques
         private static string provider = "localhost";
@@ -62,7 +62,7 @@ namespace Conservatoire.DAL
                     string mail = (string)reader.GetValue(4);
                     string adresse = (string)reader.GetValue(5);
                     int niveau= (int)reader.GetValue(6);
-                    bool bourse = (bool)reader.GetValue(7);
+                    int bourse = (int)reader.GetValue(7);
 
                     //Instanciation d'un Emplye
                     e = new Eleve(numero, nom, prenom, tel, mail, adresse, niveau, bourse);
@@ -100,8 +100,7 @@ namespace Conservatoire.DAL
             List<Eleve> ele = new List<Eleve>();
 
             try
-            {
-                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+            { maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
                 maConnexionSql.openConnection();
                 Ocom = maConnexionSql.reqExec("Select id, nom, prenom, tel, mail, adresse, niveau, bourse from personne join eleve on personne.id = eleve.ideleve where id in (select  ideleve from inscription where numseance = " + unNumSeance + ")");
                 MySqlDataReader reader = Ocom.ExecuteReader();
@@ -116,7 +115,7 @@ namespace Conservatoire.DAL
                     string mail = (string)reader.GetValue(4);
                     string adresse = (string)reader.GetValue(5);
                     int niv = (int)reader.GetValue(6);
-                    bool bourse = (bool)reader.GetValue(7);
+                    int bourse = (int)reader.GetValue(7);
 
                     //Instanciation d'un Emplye
                     e = new Eleve(numero, nom, prenom, tel, mail, adresse, niv, bourse);
@@ -126,8 +125,7 @@ namespace Conservatoire.DAL
                 }
                 reader.Close();
 
-                maConnexionSql.closeConnection();
-
+                maConnexionSql.closeConnection(); 
                 // Envoi de la liste au Manager
                 return (ele);
             }

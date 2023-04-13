@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Conservatoire.modele
 {
-    class Personnes
+    public class Personnes
     {
 
         private int id;
@@ -18,7 +18,11 @@ namespace Conservatoire.modele
 
         // remplace getId()
         public int Id { get => id; set => id = value; }
-
+        public string Nom { get => nom; }
+        public string Prenom { get => prenom; }
+        public string Tel { get => tel; }
+        public string Adresse { get => adresse; }
+        public string Mail { get => mail; }
 
         public Personnes(int unId, string unNom, string unPrenom, string unTel,string unMail, string uneAdresse)
         {
@@ -35,7 +39,5 @@ namespace Conservatoire.modele
         {
             get => ("Id : " + this.id + " Nom : " + this.nom + " Prenom : " + this.prenom + " Télephone : " + this.tel + " Mail: " + this.mail + " Adresse: " + this.adresse);
         }
-
-        public string Nom { get => nom; }
     }
 }
