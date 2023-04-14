@@ -67,5 +67,13 @@ namespace Conservatoire.vue
 
             affiche();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Prof unProf = (Prof)listBox1.SelectedItem;
+
+            Form5 form5 = new Form5(unProf);
+            form5.ShowDialog();
+        }
     }
 }

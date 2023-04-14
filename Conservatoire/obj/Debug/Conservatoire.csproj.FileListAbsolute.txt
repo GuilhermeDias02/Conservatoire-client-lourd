@@ -35,3 +35,4 @@ C:\Users\guilh\source\repos\Conservatoire\Conservatoire\obj\Debug\Conservatoire.
 C:\Users\guilh\source\repos\Conservatoire\Conservatoire\obj\Debug\Conservatoire.vue.Form2.resources
 C:\Users\guilh\source\repos\Conservatoire\Conservatoire\obj\Debug\Conservatoire.vue.Form3.resources
 C:\Users\guilh\source\repos\Conservatoire\Conservatoire\obj\Debug\Conservatoire.vue.Form4.resources
+C:\Users\guilh\source\repos\Conservatoire\Conservatoire\obj\Debug\Conservatoire.vue.Form5.resources

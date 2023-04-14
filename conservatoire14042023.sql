@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 07 avr. 2023 à 15:08
+-- Généré le : ven. 14 avr. 2023 à 17:44
 -- Version du serveur : 10.4.24-MariaDB
 -- Version de PHP : 8.1.6
 
@@ -237,7 +237,11 @@ INSERT INTO `personne` (`ID`, `NOM`, `PRENOM`, `TEL`, `MAIL`, `ADRESSE`) VALUES
 (12, 'Thomas', 'Guillaume', '0345678901', 'guillaume.thomas@example.com', '144 rue Saint-Antoine'),
 (13, 'Vidal', 'Caroline', '0456789012', 'caroline.vidal@example.com', '156 boulevard Saint-Germain'),
 (14, 'Boucher', 'Alexandre', '0567890123', 'alexandre.boucher@example.com', '168 avenue de Clichy'),
-(15, 'Chevalier', 'Sophie', '0678901234', 'sophie.chevalier@example.com', '180 rue de la Convention');
+(15, 'Chevalier', 'Sophie', '0678901234', 'sophie.chevalier@example.com', '180 rue de la Convention'),
+(16, 'nomtest', 'prenomtest', 'teltest', 'mailtest', 'adressetest'),
+(17, 'test2', 'test2', 'test2', 'test2@test', 'test2 test2'),
+(18, 'test3', 'test3', 'test3', 'test3@test3', 'test3 test3'),
+(19, 'test3', 'test3', 'test3', 'test3@test3', 'test3 test3');
 
 -- --------------------------------------------------------
 
@@ -258,7 +262,9 @@ CREATE TABLE `prof` (
 INSERT INTO `prof` (`IDPROF`, `INSTRUMENT`, `SALAIRE`) VALUES
 (1, 'Basse', 1000.00),
 (2, 'Batterie', 1200.00),
-(3, 'Piano', 1400.00);
+(3, 'Piano', 1400.00),
+(17, 'Basse', 1000.00),
+(19, 'Trompette', 1100.00);
 
 -- --------------------------------------------------------
 
@@ -281,6 +287,7 @@ CREATE TABLE `seance` (
 
 INSERT INTO `seance` (`IDPROF`, `NUMSEANCE`, `TRANCHE`, `JOUR`, `NIVEAU`, `CAPACITE`) VALUES
 (1, 1, '10h-11h', 'lundi', 1, 10),
+(1, 4, '11h-12h', 'mardi', 4, 3),
 (2, 2, '10h-11h', 'mardi', 2, 10),
 (3, 3, '10h-11h', 'vendredi', 4, 5);
 
@@ -400,7 +407,13 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT pour la table `personne`
 --
 ALTER TABLE `personne`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT pour la table `seance`
+--
+ALTER TABLE `seance`
+  MODIFY `NUMSEANCE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Contraintes pour les tables déchargées
@@ -419,7 +432,7 @@ ALTER TABLE `eleve`
 ALTER TABLE `inscription`
   ADD CONSTRAINT `fk_insc_eleve` FOREIGN KEY (`IDELEVE`) REFERENCES `eleve` (`IDELEVE`),
   ADD CONSTRAINT `fk_inscr_prof` FOREIGN KEY (`IDPROF`) REFERENCES `prof` (`IDPROF`),
-  ADD CONSTRAINT `fk_numSeance` FOREIGN KEY (`NUMSEANCE`) REFERENCES `seance` (`NUMSEANCE`);
+  ADD CONSTRAINT `fk_inscr_seance` FOREIGN KEY (`NUMSEANCE`) REFERENCES `seance` (`NUMSEANCE`);
 
 --
 -- Contraintes pour la table `payer`
@@ -427,8 +440,8 @@ ALTER TABLE `inscription`
 ALTER TABLE `payer`
   ADD CONSTRAINT `fk_paye_eleve` FOREIGN KEY (`IDELEVE`) REFERENCES `eleve` (`IDELEVE`),
   ADD CONSTRAINT `fk_paye_lib` FOREIGN KEY (`LIBELLE`) REFERENCES `trim` (`LIBELLE`),
-  ADD CONSTRAINT `fk_paye_numSeance` FOREIGN KEY (`NUMSEANCE`) REFERENCES `seance` (`NUMSEANCE`),
-  ADD CONSTRAINT `fk_paye_prof` FOREIGN KEY (`IDPROF`) REFERENCES `prof` (`IDPROF`);
+  ADD CONSTRAINT `fk_paye_prof` FOREIGN KEY (`IDPROF`) REFERENCES `prof` (`IDPROF`),
+  ADD CONSTRAINT `fk_paye_seance` FOREIGN KEY (`NUMSEANCE`) REFERENCES `seance` (`NUMSEANCE`);
 
 --
 -- Contraintes pour la table `prof`

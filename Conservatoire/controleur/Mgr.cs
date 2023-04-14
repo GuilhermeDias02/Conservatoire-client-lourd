@@ -16,6 +16,9 @@ namespace Conservatoire.controleur
         private List<Seance> maListeSeances;
         private List<Eleve> maListeEleves;
         private List<string> maListeInstruments;
+        private List<string> maListeTranches;
+        private List<string> maListeJours;
+        private List<int> maListeNiveaux;
 
         public Mgr()
         {
@@ -24,6 +27,9 @@ namespace Conservatoire.controleur
             maListeSeances = new List<Seance>();
             maListeEleves = new List<Eleve>();
             maListeInstruments = new List<string>();
+            maListeTranches = new List<string>();
+            maListeJours = new List<string>();
+            maListeNiveaux = new List<int>();
         }
 
 
@@ -84,6 +90,42 @@ namespace Conservatoire.controleur
             ProfDAO.deleteProf(unProf.Id);
 
             PersonneDAO.deletePersonne(unProf.Id);
+        }
+
+        public List<string> chargementTranches()
+        {
+            maListeTranches = TrancheDAO.getTranche();
+
+            return (maListeTranches);
+        }
+
+        public List<string> chargementJours()
+        {
+            maListeJours = JourDAO.getJours();
+
+            return (maListeJours);
+        }
+
+        public List<int> chargementNiveaux()
+        {
+            maListeNiveaux = NIveauDAO.getNiveaux();
+
+            return (maListeNiveaux);
+        }
+
+        public void ajoutSeance(int id, string tranche, string jour, int niveau, int capacité)
+        {
+            SeanceDAO.insertSeance(id, tranche, jour, niveau, capacité);
+        }
+
+        public void suppSeance(int numSeance)
+        {
+            SeanceDAO.deleteSeance(numSeance);
+        }
+
+        public void modifSeance(int numSeance, string tranche, string jour)
+        {
+            SeanceDAO.modifSeance(numSeance, tranche, jour);
         }
     }
 }

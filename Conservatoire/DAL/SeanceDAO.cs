@@ -146,5 +146,95 @@ namespace Conservatoire.DAL
 
 
         }
+
+        public static void insertSeance(int id, string tranche, string jour, int niveau, int capacité)
+        {
+
+            try
+            {
+
+                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+
+                maConnexionSql.openConnection();
+
+                Ocom = maConnexionSql.reqExec("INSERT INTO seance (idprof, tranche, jour, niveau, capacite) VALUES ("+ id +", '"+ tranche +"', '"+ jour +"', "+ niveau +", "+ capacité +")");
+
+                int i = Ocom.ExecuteNonQuery();
+
+                maConnexionSql.closeConnection();
+
+            }
+
+            catch (Exception emp)
+            {
+
+                throw (emp);
+            }
+
+        }
+
+        public static void deleteSeance(int unNumSeance)
+        {
+
+            try
+            {
+
+                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+
+                maConnexionSql.openConnection();
+
+                Ocom = maConnexionSql.reqExec("DELETE FROM seance WHERE numseance = " + unNumSeance);
+
+
+                int i = Ocom.ExecuteNonQuery();
+
+
+
+                maConnexionSql.closeConnection();
+
+
+
+            }
+
+            catch (Exception emp)
+            {
+
+                throw (emp);
+            }
+
+
+        }
+
+        public static void modifSeance(int unNumSeance, string uneTranche, string unJour)
+        {
+
+            try
+            {
+
+                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+
+                maConnexionSql.openConnection();
+
+                Ocom = maConnexionSql.reqExec("UPDATE seance SET tranche = '"+ uneTranche +"', jour = '"+ unJour +"' WHERE numseance = "+ unNumSeance);
+
+
+                int i = Ocom.ExecuteNonQuery();
+
+
+
+                maConnexionSql.closeConnection();
+
+
+
+            }
+
+            catch (Exception emp)
+            {
+
+                throw (emp);
+            }
+
+
+        }
     }
 }
