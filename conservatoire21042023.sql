@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 14 avr. 2023 à 17:44
+-- Généré le : ven. 21 avr. 2023 à 18:48
 -- Version du serveur : 10.4.24-MariaDB
 -- Version de PHP : 8.1.6
 
@@ -166,7 +166,8 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`id`, `indentifiant`, `mdp`) VALUES
-(1, 'GuilhermeAdmin', 'aa36dc6e81e2ac7ad03e12fedcb6a2c0');
+(1, 'GuilhermeAdmin', 'aa36dc6e81e2ac7ad03e12fedcb6a2c0'),
+(2, 'GuilhermeAdmin', '746ea4028f2c438b5798afdd9ae74479');
 
 -- --------------------------------------------------------
 
@@ -203,6 +204,15 @@ CREATE TABLE `payer` (
   `PAYE` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `payer`
+--
+
+INSERT INTO `payer` (`IDPROF`, `IDELEVE`, `NUMSEANCE`, `LIBELLE`, `DATEPAIEMENT`, `PAYE`) VALUES
+(1, 4, 1, 'avril-juin', '0000-00-00', 0),
+(1, 4, 1, 'janvier-avril', '0000-00-00', 0),
+(1, 4, 1, 'septembre-décembre', '2022-11-21', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -223,7 +233,7 @@ CREATE TABLE `personne` (
 --
 
 INSERT INTO `personne` (`ID`, `NOM`, `PRENOM`, `TEL`, `MAIL`, `ADRESSE`) VALUES
-(1, 'Dupont', 'Jean', '0123456789', 'jean.dupont@example.com', '12 rue de la Paix'),
+(1, 'Dupont', 'Edouard', '0123456789', 'edouard.dupont@example.com', '12 rue de la Paix'),
 (2, 'Martin', 'Marie', '0234567890', 'marie.martin@example.com', '24 avenue des Champs-Élysées'),
 (3, 'Durand', 'Pierre', '0345678901', 'pierre.durand@example.com', '36 rue du Faubourg Saint-Honoré'),
 (4, 'Lefebvre', 'Sophie', '0456789012', 'sophie.lefebvre@example.com', '48 boulevard Haussmann'),
@@ -299,8 +309,69 @@ INSERT INTO `seance` (`IDPROF`, `NUMSEANCE`, `TRANCHE`, `JOUR`, `NIVEAU`, `CAPAC
 
 CREATE TABLE `trim` (
   `LIBELLE` char(32) NOT NULL,
-  `DATEFIN` char(32) DEFAULT NULL
+  `DATEFIN` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `trim`
+--
+
+INSERT INTO `trim` (`LIBELLE`, `DATEFIN`) VALUES
+('avril-juin', '2023-06-21'),
+('janvier-avril', '2023-04-23'),
+('septembre-décembre', '2022-12-17');
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `veleve`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `veleve` (
+`id` int(11)
+,`nom` char(32)
+,`prenom` char(32)
+,`tel` varchar(14)
+,`mail` char(32)
+,`adresse` char(32)
+,`niveau` int(11)
+,`bourse` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `vprof`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `vprof` (
+`id` int(11)
+,`nom` char(32)
+,`prenom` char(32)
+,`tel` varchar(14)
+,`mail` char(32)
+,`adresse` char(32)
+,`instrument` char(32)
+,`salaire` double(6,2)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `veleve`
+--
+DROP TABLE IF EXISTS `veleve`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `veleve`  AS SELECT `personne`.`ID` AS `id`, `personne`.`NOM` AS `nom`, `personne`.`PRENOM` AS `prenom`, `personne`.`TEL` AS `tel`, `personne`.`MAIL` AS `mail`, `personne`.`ADRESSE` AS `adresse`, `eleve`.`NIVEAU` AS `niveau`, `eleve`.`BOURSE` AS `bourse` FROM (`personne` join `eleve` on(`personne`.`ID` = `eleve`.`IDELEVE`))  ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `vprof`
+--
+DROP TABLE IF EXISTS `vprof`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vprof`  AS SELECT `personne`.`ID` AS `id`, `personne`.`NOM` AS `nom`, `personne`.`PRENOM` AS `prenom`, `personne`.`TEL` AS `tel`, `personne`.`MAIL` AS `mail`, `personne`.`ADRESSE` AS `adresse`, `prof`.`INSTRUMENT` AS `instrument`, `prof`.`SALAIRE` AS `salaire` FROM (`personne` join `prof` on(`personne`.`ID` = `prof`.`IDPROF`))  ;
 
 --
 -- Index pour les tables déchargées
@@ -401,7 +472,7 @@ ALTER TABLE `trim`
 -- AUTO_INCREMENT pour la table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `personne`
