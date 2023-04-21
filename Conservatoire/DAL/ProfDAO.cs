@@ -97,6 +97,66 @@ namespace Conservatoire.DAL
 
         }
 
+        public static Prof getProf(int id)
+        {
+
+            try
+            {
+
+                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+
+
+                maConnexionSql.openConnection();
+
+
+                Ocom = maConnexionSql.reqExec("SELECT id, nom, prenom, tel, mail, adresse, instrument, salaire from personne join prof on personne.ID = prof.IDPROF WHERE ID = "+ id +";");
+
+
+                MySqlDataReader reader = Ocom.ExecuteReader();
+
+                Prof p = new Prof(1000, "", "", "", "", "", "", 1000);
+
+
+
+
+                while (reader.Read())
+                {
+
+                    int numero = (int)reader.GetValue(0);
+                    string nom = (string)reader.GetValue(1);
+                    string prenom = (string)reader.GetValue(2);
+                    string tel = (string)reader.GetValue(3);
+                    string mail = (string)reader.GetValue(4);
+                    string adresse = (string)reader.GetValue(5);
+                    string instrument = (string)reader.GetValue(6);
+                    double salaire = (double)reader.GetValue(7);
+
+                    //Instanciation d'un Emplye
+                    p = new Prof(numero, nom, prenom, tel, mail, adresse, instrument, salaire);
+
+                }
+
+
+
+                reader.Close();
+
+                maConnexionSql.closeConnection();
+
+                // Envoi de la liste au Manager
+                return (p);
+
+
+            }
+
+            catch (Exception emp)
+            {
+
+                throw (emp);
+
+            }
+
+
+        }
 
         public static void insertProf(int unId, Prof p)
         {
@@ -154,6 +214,30 @@ namespace Conservatoire.DAL
             }
 
 
+        }
+
+        public static void updateProf(int unId, Prof p)
+        {
+            try
+            {
+
+                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+
+                maConnexionSql.openConnection();
+
+                Ocom = maConnexionSql.reqExec("update prof set instrument = '" + p.Instrument + "', salaire = "+ p.Salaire +" where idProf = "+ unId);
+
+                int i = Ocom.ExecuteNonQuery();
+
+                maConnexionSql.closeConnection();
+
+            }
+
+            catch (Exception emp)
+            {
+
+                throw (emp);
+            }
         }
     }
 }

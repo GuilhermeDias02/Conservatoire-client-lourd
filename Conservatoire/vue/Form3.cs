@@ -65,7 +65,6 @@ namespace Conservatoire.vue
             }
         }
 
-
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             lEleve = monManager.chargementEleveInscritsBD(((Seance)listBox1.SelectedItem).NumSeance);

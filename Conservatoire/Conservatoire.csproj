@@ -84,6 +84,7 @@
     <Compile Include="controleur\Mgr.cs" />
     <Compile Include="DAL\Connexion.cs" />
     <Compile Include="DAL\EleveDAO.cs" />
+    <Compile Include="DAL\InscriptionDAO.cs" />
     <Compile Include="DAL\InstrumentDAO.cs" />
     <Compile Include="DAL\JourDAO.cs" />
     <Compile Include="DAL\NIveauDAO.cs" />
@@ -91,12 +92,15 @@
     <Compile Include="DAL\ProfDAO.cs" />
     <Compile Include="DAL\SeanceDAO.cs" />
     <Compile Include="DAL\TrancheDAO.cs" />
+    <Compile Include="DAL\TrimDAO.cs" />
     <Compile Include="modele\Eleve.cs" />
+    <Compile Include="modele\Inscription.cs" />
     <Compile Include="modele\Instrument.cs" />
     <Compile Include="modele\Login.cs" />
     <Compile Include="modele\Personnes.cs" />
     <Compile Include="modele\Prof.cs" />
     <Compile Include="modele\Seance.cs" />
+    <Compile Include="modele\Trim.cs" />
     <Compile Include="vue\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +133,12 @@
     <Compile Include="vue\Form5.Designer.cs">
       <DependentUpon>Form5.cs</DependentUpon>
     </Compile>
+    <Compile Include="vue\Form6.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="vue\Form6.Designer.cs">
+      <DependentUpon>Form6.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -152,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="vue\Form5.resx">
       <DependentUpon>Form5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="vue\Form6.resx">
+      <DependentUpon>Form6.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

@@ -240,5 +240,29 @@ namespace Conservatoire.DAL
 
 
         }
+
+        public static void updatePersonneProf(int unId, Prof p)
+        {
+            try
+            {
+
+                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+
+                maConnexionSql.openConnection();
+
+                Ocom = maConnexionSql.reqExec("update personne set nom = '" + p.Nom + "', prenom = '" + p.Prenom + "', tel = '" + p.Tel + "', mail = '" + p.Mail + "', adresse ='"+ p.Adresse +"' where id = " + unId);
+
+                int i = Ocom.ExecuteNonQuery();
+
+                maConnexionSql.closeConnection();
+
+            }
+
+            catch (Exception emp)
+            {
+
+                throw (emp);
+            }
+        }
     }
 }
