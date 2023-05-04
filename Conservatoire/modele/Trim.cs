@@ -24,6 +24,7 @@ namespace Conservatoire.modele
             get => ("Trim: " + libelle + " Date payment: "+ DatePaiement +" Payé: "+ Paye);
         }
         public string Paye { get => paye; set => paye = value; }
-        public DateTime DatePaiement { get => ; set => datePaiement = value; }
+        public DateTime DatePaiement { get => datePaiement; set => datePaiement = value; }
+        public string Libelle { get => libelle; set => libelle = value; }
     }
 }

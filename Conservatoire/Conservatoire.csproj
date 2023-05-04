@@ -88,6 +88,7 @@
     <Compile Include="DAL\InstrumentDAO.cs" />
     <Compile Include="DAL\JourDAO.cs" />
     <Compile Include="DAL\NIveauDAO.cs" />
+    <Compile Include="DAL\PayerDAO.cs" />
     <Compile Include="DAL\PersonneDAO.cs" />
     <Compile Include="DAL\ProfDAO.cs" />
     <Compile Include="DAL\SeanceDAO.cs" />

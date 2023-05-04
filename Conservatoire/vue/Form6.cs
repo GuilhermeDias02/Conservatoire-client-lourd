@@ -54,18 +54,6 @@ namespace Conservatoire.vue
             lTrim = monManager.chargementPaiementTrim(((Inscription)listBox1.SelectedItem).IdEleve, ((Inscription)listBox1.SelectedItem).NumSeance);
 
             afficheT();
-
-            /*for (int i = 0; i < listBox2.Items.Count; i++)
-            {
-                if (((Trim)listBox2.Items[i]).Paye == "non")
-                {
-                    listBox2.Items[i].BackColor = Color.Red;
-                }
-                else
-                {
-                    listBox2.Items[i].BackColor = Color.Green;
-                }
-            }*/
         }
 
         private void afficheT()
@@ -102,7 +90,23 @@ namespace Conservatoire.vue
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            textBox1.Text = ((Trim)listBox2.SelectedItem).DatePaiement.ToString("yyyy/mm/dd");
+            DateTime date = DateTime.Now;
+
+            //textBox1.Text = ((Trim)listBox2.SelectedItem).DatePaiement.ToString("yyyy/MM/dd");
+
+            //textBox1.Text = date.ToString("yyyy/MM/dd");
+
+            //textBox1.Text = ((Trim)listBox2.SelectedItem).Paye;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string date = textBox1.Text;
+            int idEleve = ((Inscription)listBox1.SelectedItem).IdEleve;
+            int numSeance = ((Inscription)listBox1.SelectedItem).NumSeance;
+            string libelle = ((Trim)listBox2.SelectedItem).Libelle;
+
+            monManager.confirmerPaiement(date, idEleve, numSeance, libelle);
         }
     }
 }

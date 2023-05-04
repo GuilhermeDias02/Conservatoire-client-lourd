@@ -156,5 +156,10 @@ namespace Conservatoire.controleur
 
             return (maListeTrim);
         }
+
+        public void confirmerPaiement(string date, int idEleve, int numSeance, string libelle)
+        {
+            PayerDAO.updatePayer(date, 1, idEleve, numSeance, libelle);
+        }
     }
 }

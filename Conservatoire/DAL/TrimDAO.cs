@@ -82,5 +82,30 @@ namespace Conservatoire.DAL
                 throw (emp);
             }
         }
+
+        public static void updateTrim(int unNumSeance, string uneTranche, string unJour)
+        {
+
+            try
+            {
+
+                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+
+                maConnexionSql.openConnection();
+
+                Ocom = maConnexionSql.reqExec("UPDATE seance SET tranche = '" + uneTranche + "', jour = '" + unJour + "' WHERE numseance = " + unNumSeance);
+
+                int i = Ocom.ExecuteNonQuery();
+
+                maConnexionSql.closeConnection();
+            }
+
+            catch (Exception emp)
+            {
+                throw (emp);
+            }
+
+
+        }
     }
 }
