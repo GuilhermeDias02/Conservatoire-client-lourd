@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 21 avr. 2023 à 18:48
+-- Généré le : jeu. 04 mai 2023 à 19:02
 -- Version du serveur : 10.4.24-MariaDB
 -- Version de PHP : 8.1.6
 
@@ -200,8 +200,8 @@ CREATE TABLE `payer` (
   `IDELEVE` int(11) NOT NULL,
   `NUMSEANCE` int(11) NOT NULL,
   `LIBELLE` char(32) NOT NULL,
-  `DATEPAIEMENT` date DEFAULT NULL,
-  `PAYE` int(11) DEFAULT NULL
+  `DATEPAIEMENT` date NOT NULL,
+  `PAYE` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -209,8 +209,8 @@ CREATE TABLE `payer` (
 --
 
 INSERT INTO `payer` (`IDPROF`, `IDELEVE`, `NUMSEANCE`, `LIBELLE`, `DATEPAIEMENT`, `PAYE`) VALUES
-(1, 4, 1, 'avril-juin', '0000-00-00', 0),
-(1, 4, 1, 'janvier-avril', '0000-00-00', 0),
+(1, 4, 1, 'avril-juin', '2000-01-01', 0),
+(1, 4, 1, 'janvier-avril', '2023-04-27', 1),
 (1, 4, 1, 'septembre-décembre', '2022-11-21', 1);
 
 -- --------------------------------------------------------
