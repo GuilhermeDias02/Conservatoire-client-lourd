@@ -15,13 +15,15 @@ namespace Conservatoire.modele
         public Trim(string libelle, DateTime datePaiement, string paye)
         {
             this.libelle = libelle;
-            this.datePaiement = datePaiement;
-            this.paye = paye;
+            this.DatePaiement = datePaiement;
+            this.Paye = paye;
         }
 
-        public string Decription
+        public string Description
         {
-            get => ("Trim: " + libelle + " Date payment: "+ datePaiement +" Payé: "+ paye);
+            get => ("Trim: " + libelle + " Date payment: "+ DatePaiement +" Payé: "+ Paye);
         }
+        public string Paye { get => paye; set => paye = value; }
+        public DateTime DatePaiement { get => ; set => datePaiement = value; }
     }
 }

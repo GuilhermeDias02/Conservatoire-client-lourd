@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Conservatoire.vue
 {
@@ -53,12 +54,25 @@ namespace Conservatoire.vue
             lTrim = monManager.chargementPaiementTrim(((Inscription)listBox1.SelectedItem).IdEleve, ((Inscription)listBox1.SelectedItem).NumSeance);
 
             afficheT();
+
+            /*for (int i = 0; i < listBox2.Items.Count; i++)
+            {
+                if (((Trim)listBox2.Items[i]).Paye == "non")
+                {
+                    listBox2.Items[i].BackColor = Color.Red;
+                }
+                else
+                {
+                    listBox2.Items[i].BackColor = Color.Green;
+                }
+            }*/
         }
 
         private void afficheT()
         {
             try
             {
+                listBox2.DataSource = null;
                 listBox2.DataSource = lTrim;
                 listBox2.DisplayMember = "Description";
             }
@@ -68,5 +82,27 @@ namespace Conservatoire.vue
             }
         }
 
+        private void listBox2_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            e.DrawBackground();
+
+            Brush brush = Brushes.Black; // seulement s'il y a un problème
+
+            if (((Trim)listBox2.Items[e.Index]).Paye == "non")
+            {
+                brush = Brushes.Red; // si c'est pas encore payé
+            }
+            else
+            {
+                brush = Brushes.SeaGreen; // si c'est payé
+            }
+
+            e.Graphics.DrawString(((Trim)listBox2.Items[e.Index]).Description, e.Font, brush, e.Bounds, StringFormat.GenericDefault);
+        }
+
+        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            textBox1.Text = ((Trim)listBox2.SelectedItem).DatePaiement.ToString("yyyy/mm/dd");
+        }
     }
 }
