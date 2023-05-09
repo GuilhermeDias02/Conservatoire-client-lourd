@@ -39,7 +39,6 @@ namespace Conservatoire.vue
         {
             try
             {
-                listBox1.DataSource = null;
                 listBox1.DataSource = lInscriptions;
                 listBox1.DisplayMember = "Description";
             }
@@ -60,7 +59,6 @@ namespace Conservatoire.vue
         {
             try
             {
-                listBox2.DataSource = null;
                 listBox2.DataSource = lTrim;
                 listBox2.DisplayMember = "Description";
             }
@@ -90,13 +88,11 @@ namespace Conservatoire.vue
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DateTime date = DateTime.Now;
+            if (listBox2.SelectedItem != null)
+            {
+                textBox1.Text = ((Trim)listBox2.SelectedItem).DatePaiement.ToString("yyyy/MM/dd");
 
-            //textBox1.Text = ((Trim)listBox2.SelectedItem).DatePaiement.ToString("yyyy/MM/dd");
-
-            //textBox1.Text = date.ToString("yyyy/MM/dd");
-
-            //textBox1.Text = ((Trim)listBox2.SelectedItem).Paye;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
