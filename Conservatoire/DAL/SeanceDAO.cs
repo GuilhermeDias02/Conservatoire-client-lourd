@@ -17,6 +17,8 @@ namespace Conservatoire.DAL
         private static string uid = "root";
         private static string mdp = "";
 
+        private static string connectionString = "server=localhost;userid=root;password=;database=conservatoire4";
+
         private static ConnexionSql maConnexionSql;
 
         private static MySqlCommand Ocom;
@@ -90,18 +92,25 @@ namespace Conservatoire.DAL
             try
             {
 
-                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                /*maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
 
                 maConnexionSql.openConnection();
 
                 Ocom = maConnexionSql.reqExec("SELECT * FROM seance WHERE idprof = " + unIdProf);
 
-                /*Ocom.CommandText = "SELECT * FROM seance WHERE idprof= @idProf";
-                Ocom.Prepare();
+                MySqlDataReader reader = Ocom.ExecuteReader();*/
 
-                Ocom.Parameters.AddWithValue("@idProf", unIdProf);*/
+                MySqlConnection connection = new MySqlConnection(connectionString);
 
-                MySqlDataReader reader = Ocom.ExecuteReader();
+                connection.Open();
+
+                MySqlCommand command = connection.CreateCommand();
+
+                command.Parameters.AddWithValue("@idprof", unIdProf);
+
+                command.CommandText = "Select * from seance where idprof = @idprof";
+
+                MySqlDataReader reader = command.ExecuteReader();
 
                 Seance s;
 
@@ -129,7 +138,7 @@ namespace Conservatoire.DAL
 
                 reader.Close();
 
-                maConnexionSql.closeConnection();
+                connection.Close();
 
                 // Envoi de la liste au Manager
                 return (lc);
@@ -147,22 +156,37 @@ namespace Conservatoire.DAL
 
         }
 
-        public static void insertSeance(int id, string tranche, string jour, int niveau, int capacité)
+        public static void insertSeance(int id, string tranche, string jour, int niveau, int capacite)
         {
 
             try
             {
 
-                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                /*maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
 
                 maConnexionSql.openConnection();
 
-                Ocom = maConnexionSql.reqExec("INSERT INTO seance (idprof, tranche, jour, niveau, capacite) VALUES ("+ id +", '"+ tranche +"', '"+ jour +"', "+ niveau +", "+ capacité +")");
+                Ocom = maConnexionSql.reqExec("INSERT INTO seance (idprof, tranche, jour, niveau, capacite) VALUES ("+ id +", '"+ tranche +"', '"+ jour +"', "+ niveau +", "+ capacité +")");*/
+
+                MySqlConnection connection = new MySqlConnection(connectionString);
+
+                connection.Open();
+
+                MySqlCommand command = connection.CreateCommand();
+
+                command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@tranche", tranche);
+                command.Parameters.AddWithValue("@jour", jour);
+                command.Parameters.AddWithValue("@niveau", niveau);
+                command.Parameters.AddWithValue("@capacite", capacite);
+
+                command.CommandText = "INSERT INTO seance (idprof, tranche, jour, niveau, capacite) VALUES ( @id, @tranche, @jour, @niveau, @capacité)";
+
 
                 int i = Ocom.ExecuteNonQuery();
 
-                maConnexionSql.closeConnection();
-
+                //maConnexionSql.closeConnection();
+                connection.Close();
             }
 
             catch (Exception emp)
@@ -179,19 +203,29 @@ namespace Conservatoire.DAL
             try
             {
 
-                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                /*maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
 
                 maConnexionSql.openConnection();
 
-                Ocom = maConnexionSql.reqExec("DELETE FROM seance WHERE numseance = " + unNumSeance);
+                Ocom = maConnexionSql.reqExec("DELETE FROM seance WHERE numseance = " + unNumSeance);*/
+
+                MySqlConnection connection = new MySqlConnection(connectionString);
+
+                connection.Open();
+
+                MySqlCommand command = connection.CreateCommand();
+
+                command.Parameters.AddWithValue("@numseance", unNumSeance);
+
+                command.CommandText = "DELETE FROM seance WHERE numseance = @numseance";
 
 
-                int i = Ocom.ExecuteNonQuery();
+                int i = command.ExecuteNonQuery();
 
 
 
-                maConnexionSql.closeConnection();
-
+                //maConnexionSql.closeConnection();
+                connection.Close();
 
 
             }
@@ -211,19 +245,30 @@ namespace Conservatoire.DAL
             try
             {
 
-                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                /*maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
 
                 maConnexionSql.openConnection();
 
-                Ocom = maConnexionSql.reqExec("UPDATE seance SET tranche = '"+ uneTranche +"', jour = '"+ unJour +"' WHERE numseance = "+ unNumSeance);
+                Ocom = maConnexionSql.reqExec("UPDATE seance SET tranche = '"+ uneTranche +"', jour = '"+ unJour +"' WHERE numseance = "+ unNumSeance);*/
+
+                MySqlConnection connection = new MySqlConnection(connectionString);
+
+                connection.Open();
+
+                MySqlCommand command = connection.CreateCommand();
+
+                command.Parameters.AddWithValue("@numseance", unNumSeance);
+                command.Parameters.AddWithValue("@tranche", uneTranche);
+                command.Parameters.AddWithValue("@jour", unJour);
+
+                command.CommandText = "UPDATE seance SET tranche = @trance, jour = @jour WHERE numseance = @numseance";
+
+                int i = command.ExecuteNonQuery();
 
 
-                int i = Ocom.ExecuteNonQuery();
 
-
-
-                maConnexionSql.closeConnection();
-
+                //maConnexionSql.closeConnection();
+                connection.Close();
 
 
             }

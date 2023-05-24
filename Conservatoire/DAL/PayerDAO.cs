@@ -20,6 +20,8 @@ namespace Conservatoire.DAL
 
         private static string mdp = "";
 
+        private static string connectionString = "server=localhost;userid=root;password=;database=conservatoire4";
+
 
 
         private static ConnexionSql maConnexionSql;
@@ -35,15 +37,30 @@ namespace Conservatoire.DAL
             try
             {
 
-                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                /*maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
 
                 maConnexionSql.openConnection();
 
-                Ocom = maConnexionSql.reqExec("UPDATE payer SET datepaiement = '"+ date +"', paye = "+ paye +" WHERE idEleve = '"+ idEleve +"' AND numseance = '"+ numSeance +"' AND libelle = '"+ libelle +"'");
+                Ocom = maConnexionSql.reqExec("UPDATE payer SET datepaiement = '"+ date +"', paye = "+ paye +" WHERE idEleve = '"+ idEleve +"' AND numseance = '"+ numSeance +"' AND libelle = '"+ libelle +"'");*/
 
-                int i = Ocom.ExecuteNonQuery();
+                MySqlConnection connection = new MySqlConnection(connectionString);
 
-                maConnexionSql.closeConnection();
+                connection.Open();
+
+                MySqlCommand command = connection.CreateCommand();
+
+                command.Parameters.AddWithValue("@date", date);
+                command.Parameters.AddWithValue("@paye", paye);
+                command.Parameters.AddWithValue("@ideleve", idEleve);
+                command.Parameters.AddWithValue("@numseance", numSeance);
+                command.Parameters.AddWithValue("@libelle", libelle);
+
+                command.CommandText = "UPDATE payer SET datepaiement = @date, paye = @paye WHERE idEleve = @ideleve AND numseance = @numseance AND libelle = @libelle";
+
+                int i = command.ExecuteNonQuery();
+
+                //maConnexionSql.closeConnection();
+                connection.Close();
             }
 
             catch (Exception emp)

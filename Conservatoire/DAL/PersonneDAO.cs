@@ -21,7 +21,7 @@ namespace Conservatoire.DAL
 
         private static string mdp = "";
 
-
+        private static string connectionString = "server=localhost;userid=root;password=;database=conservatoire4";
 
         private static ConnexionSql maConnexionSql;
 
@@ -99,21 +99,35 @@ namespace Conservatoire.DAL
             {
 
 
-                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                /*maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
 
 
                 maConnexionSql.openConnection();
 
 
-                Ocom = maConnexionSql.reqExec("INSERT INTO personne(nom, prenom, tel, mail, adresse) VALUES ("+ p.Nom +"', '"+ p.Prenom +"', '"+ p.Tel +"', '"+ p.Mail +"', '"+ p.Adresse +"')");
+                Ocom = maConnexionSql.reqExec("INSERT INTO personne(nom, prenom, tel, mail, adresse) VALUES ("+ p.Nom +"', '"+ p.Prenom +"', '"+ p.Tel +"', '"+ p.Mail +"', '"+ p.Adresse +"')");*/
+
+                MySqlConnection connection = new MySqlConnection(connectionString);
+
+                connection.Open();
+
+                MySqlCommand command = connection.CreateCommand();
+
+                command.Parameters.AddWithValue("@nom", p.Nom);
+                command.Parameters.AddWithValue("@prenom", p.Prenom);
+                command.Parameters.AddWithValue("@tel", p.Tel);
+                command.Parameters.AddWithValue("@mail", p.Mail);
+                command.Parameters.AddWithValue("@adresse", p.Adresse);
+
+                command.CommandText = "INSERT INTO personne(nom, prenom, tel, mail, adresse) VALUES (@nom, @prenom, @tel, @mail, @adresse)";
 
 
-                int i = Ocom.ExecuteNonQuery();
+                int i = command.ExecuteNonQuery();
 
 
 
-                maConnexionSql.closeConnection();
-
+                //maConnexionSql.closeConnection();
+                connection.Close();
 
 
             }
@@ -132,21 +146,35 @@ namespace Conservatoire.DAL
             {
 
 
-                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                /*maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
 
 
                 maConnexionSql.openConnection();
 
 
-                Ocom = maConnexionSql.reqExec("INSERT INTO personne (nom, prenom, tel, mail, adresse) VALUES ('"+ p.Nom +"', '"+ p.Prenom +"', '"+ p.Tel +"', '"+ p.Mail +"', '"+ p.Adresse +"')");
+                Ocom = maConnexionSql.reqExec("INSERT INTO personne(nom, prenom, tel, mail, adresse) VALUES ("+ p.Nom +"', '"+ p.Prenom +"', '"+ p.Tel +"', '"+ p.Mail +"', '"+ p.Adresse +"')");*/
+
+                MySqlConnection connection = new MySqlConnection(connectionString);
+
+                connection.Open();
+
+                MySqlCommand command = connection.CreateCommand();
+
+                command.Parameters.AddWithValue("@nom", p.Nom);
+                command.Parameters.AddWithValue("@prenom", p.Prenom);
+                command.Parameters.AddWithValue("@tel", p.Tel);
+                command.Parameters.AddWithValue("@mail", p.Mail);
+                command.Parameters.AddWithValue("@adresse", p.Adresse);
+
+                command.CommandText = "INSERT INTO personne(nom, prenom, tel, mail, adresse) VALUES (@nom, @prenom, @tel, @mail, @adresse)";
 
 
-                int i = Ocom.ExecuteNonQuery();
+                int i = command.ExecuteNonQuery();
 
 
 
-                maConnexionSql.closeConnection();
-
+                //maConnexionSql.closeConnection();
+                connection.Close();
 
 
             }
@@ -156,8 +184,6 @@ namespace Conservatoire.DAL
 
                 throw (emp);
             }
-
-
         }
 
         public static int getLastId()
@@ -215,7 +241,7 @@ namespace Conservatoire.DAL
             try
             {
 
-                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                /*maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
 
                 maConnexionSql.openConnection();
 
@@ -226,8 +252,22 @@ namespace Conservatoire.DAL
 
 
 
-                maConnexionSql.closeConnection();
+                maConnexionSql.closeConnection();*/
 
+                MySqlConnection connection = new MySqlConnection(connectionString);
+
+                connection.Open();
+
+                MySqlCommand command = connection.CreateCommand();
+
+                command.Parameters.AddWithValue("@id", unId);
+
+                command.CommandText = "DELETE FROM personne WHERE id = @id";
+
+
+                int i = command.ExecuteNonQuery();
+
+                connection.Close();
 
 
             }
@@ -246,7 +286,7 @@ namespace Conservatoire.DAL
             try
             {
 
-                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                /*maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
 
                 maConnexionSql.openConnection();
 
@@ -254,7 +294,27 @@ namespace Conservatoire.DAL
 
                 int i = Ocom.ExecuteNonQuery();
 
-                maConnexionSql.closeConnection();
+                maConnexionSql.closeConnection();*/
+
+                MySqlConnection connection = new MySqlConnection(connectionString);
+
+                connection.Open();
+
+                MySqlCommand command = connection.CreateCommand();
+
+                command.Parameters.AddWithValue("@id", unId);
+                command.Parameters.AddWithValue("@nom", p.Nom);
+                command.Parameters.AddWithValue("@prenom", p.Prenom);
+                command.Parameters.AddWithValue("@tel", p.Tel);
+                command.Parameters.AddWithValue("@mail", p.Mail);
+                command.Parameters.AddWithValue("@adresse", p.Adresse);
+
+                command.CommandText = "update personne set nom = @nom', prenom = @prenom, tel = @tel, mail = @mail, adresse = @adresse where id = @id";
+
+
+                int i = command.ExecuteNonQuery();
+
+                connection.Close();
 
             }
 

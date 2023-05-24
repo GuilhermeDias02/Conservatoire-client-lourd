@@ -20,7 +20,7 @@ namespace Conservatoire.DAL
 
         private static string mdp = "";
 
-
+        private static string connectionString = "server=localhost;userid=root;password=;database=conservatoire4";
 
         private static ConnexionSql maConnexionSql;
 
@@ -36,13 +36,24 @@ namespace Conservatoire.DAL
             try
             {
 
-                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                /*maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
 
                 maConnexionSql.openConnection();
 
-                Ocom = maConnexionSql.reqExec("select libelle, datePaiement, paye from payer where idEleve= "+ idEleve +" and numseance="+ numSeance);
+                Ocom = maConnexionSql.reqExec("select libelle, datePaiement, paye from payer where idEleve= "+ idEleve +" and numseance="+ numSeance);*/
 
-                MySqlDataReader reader = Ocom.ExecuteReader();
+                MySqlConnection connection = new MySqlConnection(connectionString);
+
+                connection.Open();
+
+                MySqlCommand command = connection.CreateCommand();
+
+                command.Parameters.AddWithValue("@ideleve", idEleve);
+                command.Parameters.AddWithValue("@numseance", numSeance);
+
+                command.CommandText = "select libelle, datePaiement, paye from payer where idEleve= @ideleve and numseance= @numseance";
+
+                MySqlDataReader reader = command.ExecuteReader();
 
                 Trim t;
 
@@ -71,7 +82,8 @@ namespace Conservatoire.DAL
 
                 reader.Close();
 
-                maConnexionSql.closeConnection();
+                //maConnexionSql.closeConnection();
+                connection.Close();
 
                 // Envoi de la liste au Manager
                 return (lc);
@@ -89,7 +101,7 @@ namespace Conservatoire.DAL
             try
             {
 
-                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                /*maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
 
                 maConnexionSql.openConnection();
 
@@ -97,7 +109,24 @@ namespace Conservatoire.DAL
 
                 int i = Ocom.ExecuteNonQuery();
 
-                maConnexionSql.closeConnection();
+                maConnexionSql.closeConnection();*/
+
+                MySqlConnection connection = new MySqlConnection(connectionString);
+
+                connection.Open();
+
+                MySqlCommand command = connection.CreateCommand();
+
+                command.Parameters.AddWithValue("@numseance", unNumSeance);
+                command.Parameters.AddWithValue("@tranche", uneTranche);
+                command.Parameters.AddWithValue("@jour", unJour);
+
+                command.CommandText = "UPDATE seance SET tranche = @tranche, jour = @jour WHERE numseance = @numseance";
+
+
+                int i = command.ExecuteNonQuery();
+
+                connection.Close();
             }
 
             catch (Exception emp)

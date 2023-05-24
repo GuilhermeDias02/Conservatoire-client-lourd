@@ -3,6 +3,8 @@ using Conservatoire.modele;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +21,8 @@ namespace Conservatoire.DAL
         private static string uid = "root";
 
         private static string mdp = "";
+
+        private static string connectionString = "server=localhost;userid=root;password=;database=conservatoire4";
 
 
 
@@ -100,10 +104,35 @@ namespace Conservatoire.DAL
             List<Eleve> ele = new List<Eleve>();
 
             try
-            { maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
-                maConnexionSql.openConnection();
-                Ocom = maConnexionSql.reqExec("Select id, nom, prenom, tel, mail, adresse, niveau, bourse from personne join eleve on personne.id = eleve.ideleve where id in (select  ideleve from inscription where numseance = " + unNumSeance + ")");
-                MySqlDataReader reader = Ocom.ExecuteReader();
+            {
+                /*maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                maConnexionSql.openConnection();*/
+                
+                /*Ocom = maConnexionSql.reqExec("Select id, nom, prenom, tel, mail, adresse, niveau, bourse from personne join eleve on personne.id = eleve.ideleve where id in (select  ideleve from inscription where numseance = " + unNumSeance + ")");
+                MySqlDataReader reader = Ocom.ExecuteReader();*/
+
+                MySqlConnection connection = new MySqlConnection(connectionString);
+                
+                connection.Open();
+
+                MySqlCommand command = connection.CreateCommand();
+
+                command.Parameters.AddWithValue("@numseance", unNumSeance);
+
+                command.CommandText =
+                    "Select id, nom, prenom, tel, mail, adresse, niveau, bourse from personne join eleve on personne.id = eleve.ideleve where id in (select  ideleve from inscription where numseance = @numseance)";
+
+                //command.Prepare();
+
+
+                MySqlDataReader reader = command.ExecuteReader();
+
+                // Change parameter values and call ExecuteNonQuery.
+                /*command.Parameters[0].Value = 21;
+                command.Parameters[1].Value = "Second Region";
+                command.ExecuteNonQuery();*/
+                /// requete préparée
+
                 Eleve e;
 
                 while (reader.Read())
@@ -125,7 +154,8 @@ namespace Conservatoire.DAL
                 }
                 reader.Close();
 
-                maConnexionSql.closeConnection(); 
+                //maConnexionSql.closeConnection();
+                connection.Close();
                 // Envoi de la liste au Manager
                 return (ele);
             }

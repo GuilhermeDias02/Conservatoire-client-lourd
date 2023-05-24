@@ -9,19 +9,19 @@ namespace Conservatoire.modele
 {
     public class Inscription
     {
-        private int idProf;
-        private string nomProf;
-        private string prenomProf;
+        private readonly int idProf;
+        private readonly string nomProf;
+        private readonly string prenomProf;
 
         private int idEleve;
-        private string nomEleve;
-        private string prenomEleve;
+        private readonly string nomEleve;
+        private readonly string prenomEleve;
 
         private int numSeance;
-        private string tranche;
-        private string jour;
+        private readonly string tranche;
+        private readonly string jour;
 
-        private DateTime dateInscription;
+        private readonly DateTime dateInscription;
 
         /*public Inscription(int unIdProf, int unIdEleve, int unNumSeance, DateTime uneDateInscription)
         {
