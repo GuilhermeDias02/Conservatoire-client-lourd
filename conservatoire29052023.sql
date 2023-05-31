@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 04 mai 2023 à 19:02
+-- Généré le : lun. 29 mai 2023 à 13:48
 -- Version du serveur : 10.4.24-MariaDB
 -- Version de PHP : 8.1.6
 
@@ -49,7 +49,9 @@ INSERT INTO `eleve` (`IDELEVE`, `NIVEAU`, `BOURSE`) VALUES
 (12, 1, 0),
 (13, 2, 1),
 (14, 3, 0),
-(15, 4, 1);
+(15, 4, 1),
+(20, 2, 1),
+(21, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -98,8 +100,11 @@ CREATE TABLE `inscription` (
 
 INSERT INTO `inscription` (`IDPROF`, `IDELEVE`, `NUMSEANCE`, `DATEINSCRIPTION`) VALUES
 (1, 4, 1, '2023-04-06'),
+(1, 7, 4, '2023-05-24'),
 (1, 8, 1, '2023-04-06'),
-(1, 12, 1, '2023-04-06');
+(1, 11, 1, '2023-05-23'),
+(1, 12, 1, '2023-04-06'),
+(1, 15, 1, '2023-05-23');
 
 -- --------------------------------------------------------
 
@@ -251,7 +256,9 @@ INSERT INTO `personne` (`ID`, `NOM`, `PRENOM`, `TEL`, `MAIL`, `ADRESSE`) VALUES
 (16, 'nomtest', 'prenomtest', 'teltest', 'mailtest', 'adressetest'),
 (17, 'test2', 'test2', 'test2', 'test2@test', 'test2 test2'),
 (18, 'test3', 'test3', 'test3', 'test3@test3', 'test3 test3'),
-(19, 'test3', 'test3', 'test3', 'test3@test3', 'test3 test3');
+(19, 'test3', 'test3', 'test3', 'test3@test3', 'test3 test3'),
+(20, 'test4', 'test4', '85465416', 'foahbfg', 'oiahngfa'),
+(21, 'test4', 'test4', '85465416', 'foahbfg', 'oiahngfa');
 
 -- --------------------------------------------------------
 
@@ -478,7 +485,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT pour la table `personne`
 --
 ALTER TABLE `personne`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT pour la table `seance`

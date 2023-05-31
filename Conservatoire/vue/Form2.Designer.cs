@@ -108,7 +108,7 @@
             this.Controls.Add(this.listBox1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form2";
-            this.Text = "Form2";
+            this.Text = "Accueil";
             this.Load += new System.EventHandler(this.Form2_Load);
             this.ResumeLayout(false);
 

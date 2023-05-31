@@ -161,5 +161,10 @@ namespace Conservatoire.controleur
         {
             PayerDAO.updatePayer(date, 1, idEleve, numSeance, libelle);
         }
+
+        public bool verifLogin(string login, string mdp)
+        {
+            return LoginApi.verifLogin(login, mdp, LoginApi.recupJson());
+        }
     }
 }

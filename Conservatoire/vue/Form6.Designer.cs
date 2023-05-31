@@ -93,7 +93,7 @@
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.listBox1);
             this.Name = "Form6";
-            this.Text = "Form6";
+            this.Text = "Gérer les paiements";
             this.Load += new System.EventHandler(this.Form6_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -394,7 +394,7 @@
             this.Controls.Add(this.button1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form4";
-            this.Text = "Form4";
+            this.Text = "Gérer les professeurs";
             this.Load += new System.EventHandler(this.Form4_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

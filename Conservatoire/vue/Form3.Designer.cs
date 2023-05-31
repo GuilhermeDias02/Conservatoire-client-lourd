@@ -58,7 +58,7 @@
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.listBox1);
             this.Name = "Form3";
-            this.Text = "Form3";
+            this.Text = "Cours et adhérents";
             this.Load += new System.EventHandler(this.Form3_Load);
             this.ResumeLayout(false);
 
