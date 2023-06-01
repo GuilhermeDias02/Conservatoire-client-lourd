@@ -27,7 +27,10 @@ namespace Conservatoire.DAL
 
         private static MySqlCommand Ocom;
 
-        // Récupération de la liste des employés
+        /// <summary>
+        /// Récupération de la liste des jours
+        /// </summary>
+        /// <returns></returns>
         public static List<string> getJours()
         {
 

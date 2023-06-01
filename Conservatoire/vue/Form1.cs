@@ -24,8 +24,14 @@ namespace Conservatoire
             monManager = new Mgr();
         }
 
+        /// <summary>
+        /// clic bouton de connexion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
+            // Si les informations rentrées sont bonnes alors affiche la deuxième fenêtre
             if (monManager.verifLogin(textBox1.Text, textBox2.Text))
             {
                 this.Hide();
@@ -33,6 +39,7 @@ namespace Conservatoire
                 Form2 form2 = new Form2();
                 form2.ShowDialog();
             }
+            // Sinon affiche un message d'erreur
             else
             {
                 MessageBox.Show("Réessayez");

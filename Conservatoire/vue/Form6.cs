@@ -28,6 +28,11 @@ namespace Conservatoire.vue
             monManager = new Mgr();
         }
 
+        /// <summary>
+        /// Au chargement de la fenêtre affiche les inscriptions dans la list box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form6_Load(object sender, EventArgs e)
         {
             lInscriptions = monManager.chargementInscriptionsBD();
@@ -35,6 +40,9 @@ namespace Conservatoire.vue
             affiche();
         }
 
+        /// <summary>
+        /// Affiche les informations de la liste d'inscriptions dans la list box
+        /// </summary>
         private void affiche()
         {
             try
@@ -48,6 +56,11 @@ namespace Conservatoire.vue
             }
         }
 
+        /// <summary>
+        /// Affiches les paiements par trimestre de l'inscription sélectionnée
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             lTrim = monManager.chargementPaiementTrim(((Inscription)listBox1.SelectedItem).IdEleve, ((Inscription)listBox1.SelectedItem).NumSeance);
@@ -55,6 +68,9 @@ namespace Conservatoire.vue
             afficheT();
         }
 
+        /// <summary>
+        /// Affiche les informations de la liste de trimestres dans la list box
+        /// </summary>
         private void afficheT()
         {
             try
@@ -68,6 +84,11 @@ namespace Conservatoire.vue
             }
         }
 
+        /// <summary>
+        /// Affiche la couleur rouge ou verte en fonction de l'état du paiement pour chaque trimestre
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listBox2_DrawItem(object sender, DrawItemEventArgs e)
         {
             e.DrawBackground();
@@ -86,15 +107,24 @@ namespace Conservatoire.vue
             e.Graphics.DrawString(((Trim)listBox2.Items[e.Index]).Description, e.Font, brush, e.Bounds, StringFormat.GenericDefault);
         }
 
+        /// <summary>
+        /// Prérempli la date en fonction du trimestre sélectionné
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBox2.SelectedItem != null)
             {
                 textBox1.Text = ((Trim)listBox2.SelectedItem).DatePaiement.ToString("yyyy/MM/dd");
-
             }
         }
 
+        /// <summary>
+        /// Coonfirme le paiement
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             string date = textBox1.Text;

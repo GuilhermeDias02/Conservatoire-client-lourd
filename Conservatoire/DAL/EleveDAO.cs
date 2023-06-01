@@ -31,7 +31,10 @@ namespace Conservatoire.DAL
 
         private static MySqlCommand Ocom;
 
-        // Récupération de la liste des employés
+        /// <summary>
+        /// Récupération de la liste des élèves
+        /// </summary>
+        /// <returns></returns>
         public static List<Eleve> getEleves()
         {
 
@@ -99,6 +102,11 @@ namespace Conservatoire.DAL
 
         }
 
+        /// <summary>
+        /// Récupération des élèves inscrits à un cours
+        /// </summary>
+        /// <param name="unNumSeance"></param>
+        /// <returns></returns>
         public static List<Eleve> getElevesInscrits(int unNumSeance)
         {
             List<Eleve> ele = new List<Eleve>();

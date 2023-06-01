@@ -29,7 +29,14 @@ namespace Conservatoire.DAL
 
         private static MySqlCommand Ocom;
 
-        // Récupération de la liste des employés
+        /// <summary>
+        /// Modifie un paiement
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="paye"></param>
+        /// <param name="idEleve"></param>
+        /// <param name="numSeance"></param>
+        /// <param name="libelle"></param>
 
         public static void updatePayer(string date, int paye, int idEleve, int numSeance, string libelle)
         {

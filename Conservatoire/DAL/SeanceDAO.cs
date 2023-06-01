@@ -23,7 +23,10 @@ namespace Conservatoire.DAL
 
         private static MySqlCommand Ocom;
 
-        // Récupération de la liste des employés
+        /// <summary>
+        /// Récupération de la liste des séances
+        /// </summary>
+        /// <returns></returns>
         public static List<Seance> getSeances()
         {
 
@@ -84,6 +87,11 @@ namespace Conservatoire.DAL
 
         }
 
+        /// <summary>
+        /// Récupère les séances d'un prof
+        /// </summary>
+        /// <param name="unIdProf"></param>
+        /// <returns></returns>
         public static List<Seance> getSeancesProf(int unIdProf)
         {
 
@@ -156,6 +164,14 @@ namespace Conservatoire.DAL
 
         }
 
+        /// <summary>
+        /// Ajoute une nouvelle séance
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="tranche"></param>
+        /// <param name="jour"></param>
+        /// <param name="niveau"></param>
+        /// <param name="capacite"></param>
         public static void insertSeance(int id, string tranche, string jour, int niveau, int capacite)
         {
 
@@ -197,6 +213,10 @@ namespace Conservatoire.DAL
 
         }
 
+        /// <summary>
+        /// Supprime une séance
+        /// </summary>
+        /// <param name="unNumSeance"></param>
         public static void deleteSeance(int unNumSeance)
         {
 
@@ -239,6 +259,12 @@ namespace Conservatoire.DAL
 
         }
 
+        /// <summary>
+        /// Modifie une séance
+        /// </summary>
+        /// <param name="unNumSeance"></param>
+        /// <param name="uneTranche"></param>
+        /// <param name="unJour"></param>
         public static void modifSeance(int unNumSeance, string uneTranche, string unJour)
         {
 

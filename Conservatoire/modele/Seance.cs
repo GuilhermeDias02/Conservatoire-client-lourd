@@ -15,6 +15,15 @@ namespace Conservatoire.modele
         private int niveau;
         private int capacite;
 
+        /// <summary>
+        /// Crée une séance
+        /// </summary>
+        /// <param name="unIdProf"></param>
+        /// <param name="unNumSeance"></param>
+        /// <param name="uneTranche"></param>
+        /// <param name="unJour"></param>
+        /// <param name="unNiveau"></param>
+        /// <param name="uneCapacité"></param>
         public Seance(int unIdProf, int unNumSeance, string uneTranche, string unJour, int unNiveau, int uneCapacité)
         { 
             this.idProf = unIdProf;
@@ -25,10 +34,14 @@ namespace Conservatoire.modele
             this.capacite = uneCapacité;
         }
 
+        /// <summary>
+        /// Défini comment va être affiché la séance dans une list box
+        /// </summary>
         public virtual string Description
         {
             get => ("IdProf : " + this.idProf + " NumSeance: " + this.NumSeance + " Tranche: " + this.tranche + " Jour: " + this.jour + " Niveau: " + this.niveau + " Capacité: " + this.capacite);
         }
+
         public int NumSeance { get => numSeance; set => numSeance = value; }
     }
 }

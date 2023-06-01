@@ -9,9 +9,9 @@ using MySql.Data.MySqlClient;
 namespace Connecte
 {
 
-    /**
-     * Classe de connexion à une base de données
-     */
+    /// <summary>
+    /// Classe de connection à une base de données
+    /// </summary>
     public class ConnexionSql
     {
         private static ConnexionSql connection = null;

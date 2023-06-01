@@ -21,6 +21,10 @@ namespace Conservatoire.vue
         List<Seance> lSeance;
         List<Eleve> lEleve;
 
+        /// <summary>
+        /// Récupère l'id du professeur sélectionné avant
+        /// </summary>
+        /// <param name="unIdProf"></param>
         public Form3(int unIdProf)
         {
             this.idProf = unIdProf;
@@ -32,6 +36,11 @@ namespace Conservatoire.vue
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Charge la liste des séances du proffesseur et les affiche dans la listBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form3_Load(object sender, EventArgs e)
         {
             lSeance = monManager.chargementSeancesProfBD(this.idProf);
@@ -39,6 +48,9 @@ namespace Conservatoire.vue
             afficheS();
         }
 
+        /// <summary>
+        /// Utilise les informations de la liste de seance du prof et les affiche dans la list box
+        /// </summary>
         private void afficheS()
         {
             try
@@ -52,6 +64,9 @@ namespace Conservatoire.vue
             }
         }
 
+        /// <summary>
+        /// Charge la liste délèves inscrit à une séance et les affiche dans la list box
+        /// </summary>
         private void afficheE()
         {
             try
@@ -65,6 +80,11 @@ namespace Conservatoire.vue
             }
         }
 
+        /// <summary>
+        /// Affiche les élèves inscrits à un cours en fonction de la séance sélectionnée
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             lEleve = monManager.chargementEleveInscritsBD(((Seance)listBox1.SelectedItem).NumSeance);
@@ -72,6 +92,11 @@ namespace Conservatoire.vue
             afficheE();
         }
 
+        /// <summary>
+        /// Affiche les élèves inscrits à un cours en fonction de la séance sélectionnée
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listBox1_MouseClick(object sender, MouseEventArgs e)
         {
             lEleve = monManager.chargementEleveInscritsBD(((Seance)listBox1.SelectedItem).NumSeance);

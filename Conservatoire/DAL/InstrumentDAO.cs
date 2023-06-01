@@ -29,7 +29,10 @@ namespace Conservatoire.DAL
 
         private static MySqlCommand Ocom;
 
-        // Récupération de la liste des employés
+        /// <summary>
+        /// Récupération de la liste des instruments
+        /// </summary>
+        /// <returns></returns>
         public static List<string> getInstruments()
         {
 

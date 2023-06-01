@@ -31,6 +31,19 @@ namespace Conservatoire.modele
             this.dateInscription = uneDateInscription;
         }*/
 
+        /// <summary>
+        /// Crée une inscription
+        /// </summary>
+        /// <param name="unIdProf"></param>
+        /// <param name="unNomProf"></param>
+        /// <param name="unPrenomProf"></param>
+        /// <param name="unIdEleve"></param>
+        /// <param name="unNomEleve"></param>
+        /// <param name="unPrenomEleve"></param>
+        /// <param name="unNumSeance"></param>
+        /// <param name="uneTranche"></param>
+        /// <param name="unJour"></param>
+        /// <param name="uneDateInscription"></param>        
         public Inscription(int unIdProf, string unNomProf, string unPrenomProf, int unIdEleve, string unNomEleve, string unPrenomEleve, int unNumSeance, string uneTranche, string unJour, DateTime uneDateInscription)
         {
             this.idProf = unIdProf;
@@ -47,10 +60,14 @@ namespace Conservatoire.modele
             this.dateInscription = uneDateInscription;
         }
 
+        /// <summary>
+        /// Défini comment va être affiché l'inscription dans une list box
+        /// </summary>
         public string Description
         {
             get => ("Prof: "+ this.nomProf +" "+ this.prenomProf +" Elève: "+ this.nomEleve +" "+ this.prenomEleve +" Heure: "+ this.tranche +" Jour: "+ this.jour +" Date d\'inscription: "+ this.dateInscription);
         }
+
         public int IdEleve { get => idEleve; set => idEleve = value; }
         public int NumSeance { get => numSeance; set => numSeance = value; }
     }

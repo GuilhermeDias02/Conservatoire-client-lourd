@@ -29,7 +29,10 @@ namespace Conservatoire.DAL
 
         private static MySqlCommand Ocom;
 
-        // Récupération de la liste des employés
+        /// <summary>
+        /// Récupération de la liste des profs
+        /// </summary>
+        /// <returns></returns>
         public static List<Prof> getProfs()
         {
 
@@ -97,6 +100,11 @@ namespace Conservatoire.DAL
 
         }
 
+        /// <summary>
+        /// Récupération d'un professeur
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static Prof getProf(int id)
         {
 
@@ -169,6 +177,11 @@ namespace Conservatoire.DAL
 
         }
 
+        /// <summary>
+        /// Ajoute un nouveau professeur
+        /// </summary>
+        /// <param name="unId"></param>
+        /// <param name="p"></param>
         public static void insertProf(int unId, Prof p)
         {
 
@@ -207,6 +220,10 @@ namespace Conservatoire.DAL
 
         }
 
+        /// <summary>
+        /// Supprime un professeur
+        /// </summary>
+        /// <param name="unId"></param>
         public static void deleteProf(int unId)
         {
 
@@ -248,6 +265,11 @@ namespace Conservatoire.DAL
 
         }
 
+        /// <summary>
+        /// Modifie un professeur
+        /// </summary>
+        /// <param name="unId"></param>
+        /// <param name="p"></param>
         public static void updateProf(int unId, Prof p)
         {
             try

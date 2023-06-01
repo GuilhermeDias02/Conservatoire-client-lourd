@@ -27,7 +27,12 @@ namespace Conservatoire.DAL
 
         private static MySqlCommand Ocom;
 
-        // Récupération de la liste des employés
+        /// <summary>
+        /// Récupération de la liste des trimestres
+        /// </summary>
+        /// <param name="idEleve"></param>
+        /// <param name="numSeance"></param>
+        /// <returns></returns>
         public static List<Trim> getPaiementTrim(int idEleve, int numSeance)
         {
 
@@ -95,6 +100,12 @@ namespace Conservatoire.DAL
             }
         }
 
+        /// <summary>
+        /// Modifie un trimestre
+        /// </summary>
+        /// <param name="unNumSeance"></param>
+        /// <param name="uneTranche"></param>
+        /// <param name="unJour"></param>
         public static void updateTrim(int unNumSeance, string uneTranche, string unJour)
         {
 

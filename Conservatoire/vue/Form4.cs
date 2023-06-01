@@ -20,6 +20,10 @@ namespace Conservatoire.vue
 
         private Mgr monManager;
 
+        /// <summary>
+        /// Récupère le professeur sélectionné
+        /// </summary>
+        /// <param name="unProf"></param>
         public Form4(Prof unProf)
         {
             this.prof = unProf;
@@ -28,8 +32,14 @@ namespace Conservatoire.vue
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Ajoute un nouveau professeur et vérifie que l'instrument existe
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
+            // Récupération des informations
             int id = 1;
             string nom = textBox1.Text;
             string prenom = textBox2.Text;
@@ -39,9 +49,11 @@ namespace Conservatoire.vue
             string instrument = textBox6.Text;
             double salaire = Convert.ToDouble(textBox7.Text);
 
+            // Chargement des instruments éxistant dans la bd
             List<string> instruments = monManager.chargementInstruments();
             bool existe = false;
 
+            // Si l'un des instruments de la bd est égal à celui rentré alors il existe
             foreach(string instr in instruments)
             {
                 if (instrument == instr)
@@ -51,10 +63,12 @@ namespace Conservatoire.vue
                 }
             }
 
+            // Si cet instrument n'existe pas alors on affiche un message d'erreur
             if(!existe)
             {
                 MessageBox.Show("Cet instrument n'existe pas!");
             }
+            // S'il existe on crée le nouveau professeur et on l'ajoute dans la bdd
             else
             {
                 Prof nvProf = new Prof(id, nom, prenom, tel, mail, adresse, instrument, salaire);
@@ -65,6 +79,11 @@ namespace Conservatoire.vue
             }
         }
 
+        /// <summary>
+        /// Supprime de professeur précédemment selectionné
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
             monManager.suppProf(this.prof);
@@ -72,6 +91,11 @@ namespace Conservatoire.vue
             MessageBox.Show("Ce professeur a bien été supprimé");
         }
 
+        /// <summary>
+        /// Au chargement de la page on prérempli le formulaire
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form4_Load(object sender, EventArgs e)
         {
             Prof p = monManager.getUnProf(this.prof.Id);
@@ -85,8 +109,14 @@ namespace Conservatoire.vue
             textBox8.Text = Convert.ToString(p.Salaire);
         }
 
+        /// <summary>
+        /// Modifie le professeur et vérifie que l'instrument existe
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
         {
+            // Récupération des informations
             int id = 1;
             string nom = textBox14.Text;
             string prenom = textBox13.Text;
@@ -96,9 +126,11 @@ namespace Conservatoire.vue
             string instrument = textBox9.Text;
             double salaire = Convert.ToDouble(textBox8.Text);
 
+            // Chargement des instruments éxistant dans la bd
             List<string> instruments = monManager.chargementInstruments();
             bool existe = false;
 
+            // Si l'un des instruments de la bd est égal à celui rentré alors il exist
             foreach (string instr in instruments)
             {
                 if (instrument == instr)
@@ -108,10 +140,12 @@ namespace Conservatoire.vue
                 }
             }
 
+            // Si cet instrument n'existe pas alors on affiche un message d'erreur
             if (!existe)
             {
                 MessageBox.Show("Cet instrument n'existe pas!");
             }
+            // S'il existe on crée le nouveau professeur et on le modifie dans la bdd
             else
             {
                 Prof nvProf = new Prof(id, nom, prenom, tel, mail, adresse, instrument, salaire);

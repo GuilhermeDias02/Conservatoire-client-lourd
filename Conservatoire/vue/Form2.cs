@@ -24,6 +24,11 @@ namespace Conservatoire.vue
             monManager = new Mgr();
         }
 
+        /// <summary>
+        /// Lors du chargement de la fenêtre on charge et affiche les professeurs
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form2_Load(object sender, EventArgs e)
         {
             lProfs = monManager.chargementProfsBD();
@@ -31,6 +36,9 @@ namespace Conservatoire.vue
             affiche();
         }
 
+        /// <summary>
+        /// Affiche les informations de la liste de profs dans la listeBox
+        /// </summary>
         private void affiche()
         {
             try
@@ -45,6 +53,11 @@ namespace Conservatoire.vue
             }
         }
 
+        /// <summary>
+        /// Affiche la troisième fenêtre et envoie l'id du professeur selectionné
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             int unIdProf = ((Personnes)listBox1.SelectedItem).Id;
@@ -53,6 +66,11 @@ namespace Conservatoire.vue
             form3.ShowDialog();
         }
 
+        /// <summary>
+        /// Affiche la quatrième fenêtre et envoie le professeur selectionné
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
             Prof unProf = (Prof)listBox1.SelectedItem;
@@ -61,6 +79,11 @@ namespace Conservatoire.vue
             form4.ShowDialog();
         }
 
+        /// <summary>
+        /// Rafraîchit la liste de profs
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button4_Click(object sender, EventArgs e)
         {
             lProfs = monManager.chargementProfsBD();
@@ -68,6 +91,11 @@ namespace Conservatoire.vue
             affiche();
         }
 
+        /// <summary>
+        /// Affiche la cinqième fenêtre et envoie le professeur selectionné
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button5_Click(object sender, EventArgs e)
         {
             Prof unProf = (Prof)listBox1.SelectedItem;
@@ -76,6 +104,11 @@ namespace Conservatoire.vue
             form5.ShowDialog();
         }
 
+        /// <summary>
+        /// Affiche la sixième fenêtre
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
         {
             Form6 form6 = new Form6();

@@ -24,6 +24,15 @@ namespace Conservatoire.modele
         public string Adresse { get => adresse; }
         public string Mail { get => mail; }
 
+        /// <summary>
+        /// Crée un personne
+        /// </summary>
+        /// <param name="unId"></param>
+        /// <param name="unNom"></param>
+        /// <param name="unPrenom"></param>
+        /// <param name="unTel"></param>
+        /// <param name="unMail"></param>
+        /// <param name="uneAdresse"></param>
         public Personnes(int unId, string unNom, string unPrenom, string unTel,string unMail, string uneAdresse)
         {
             this.id = unId;
@@ -34,7 +43,9 @@ namespace Conservatoire.modele
             this.adresse = uneAdresse;
         }
 
-        // pour afficher la liste par la suite
+        /// <summary>
+        /// Défini comment va être affiché la personne dans une list box
+        /// </summary>
         public virtual string Description
         {
             get => ("Id : " + this.id + " Nom : " + this.nom + " Prenom : " + this.prenom + " Télephone : " + this.tel + " Mail: " + this.mail + " Adresse: " + this.adresse);

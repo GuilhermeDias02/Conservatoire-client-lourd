@@ -21,6 +21,10 @@ namespace Conservatoire.vue
 
         Mgr monManager;
 
+        /// <summary>
+        /// Récupère le professeur sélectionné
+        /// </summary>
+        /// <param name="unProf"></param>
         public Form5(Prof unProf)
         {
             this.prof = unProf;
@@ -32,13 +36,20 @@ namespace Conservatoire.vue
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Ajoute une séance à un professeur
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
+            // Récupération des informations
             string tranche = textBox1.Text;
             string jour = textBox2.Text;
             int niveau = Convert.ToInt16(textBox3.Text);
             int capacite = Convert.ToInt16(textBox4.Text);
 
+            // Récupération des tranches, jours et niveaux de la bdd
             List<string> tranches = monManager.chargementTranches();
             List<string> jours = monManager.chargementJours();
             List<int> niveaux= monManager.chargementNiveaux();
@@ -46,6 +57,7 @@ namespace Conservatoire.vue
 
             int existe = 0;
 
+            // Si la tranche rentrée n'existe pas alors existe = 1
             foreach (string tr in tranches)
             {
                 if (tranche == tr)
@@ -55,6 +67,7 @@ namespace Conservatoire.vue
                 }
                 existe = 1;
             }
+            // Si le jour rentré n'existe pas alors existe = 2
             foreach (string jr in jours)
             {
                 if (jr == jour)
@@ -64,6 +77,7 @@ namespace Conservatoire.vue
                 }
                 existe = 2;
             }
+            // Si le niveau rentré n'existe pas alors existe = 3
             foreach (int nv in niveaux)
             {
                 if (niveau == nv)
@@ -74,6 +88,7 @@ namespace Conservatoire.vue
                 existe = 3;
             }
 
+            // Si aucun problème on crée la séance sinon on affiche le message d'erreur correspondant
             switch (existe)
             {
                 case 0:
@@ -95,11 +110,13 @@ namespace Conservatoire.vue
 
                     break;
             }
-
-                
-            
         }
 
+        /// <summary>
+        /// Au chargement de la fenêtre on charge les séances de ce professeur
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form5_Load(object sender, EventArgs e)
         {
             seances = monManager.chargementSeancesProfBD(this.prof.Id);
@@ -107,6 +124,9 @@ namespace Conservatoire.vue
             afficheS();
         }
 
+        /// <summary>
+        /// Affiche le contenu de la liste de séances dans la list box
+        /// </summary>
         private void afficheS()
         {
             try
@@ -120,6 +140,11 @@ namespace Conservatoire.vue
             }
         }
 
+        /// <summary>
+        /// Supprime la séance sélectionnée
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
             monManager.suppSeance(((Seance)listBox1.SelectedItem).NumSeance);
@@ -127,17 +152,25 @@ namespace Conservatoire.vue
             MessageBox.Show("Ce cours a bien été supprimé");
         }
 
+        /// <summary>
+        /// Modifie la séance sélectionnée et vérifie les tranches et jours rentrés
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
         {
+            // Récupération des informations
             int numSeance = ((Seance)listBox1.SelectedItem).NumSeance;
             string tranche = textBox5.Text;
             string jour = textBox6.Text;
 
+            // Récupération des informations dans la bdd
             List<string> tranches = monManager.chargementTranches();
             List<string> jours = monManager.chargementJours();
 
             int existe = 0;
 
+            // Si la tranche rentrée n'existe pas alors existe = 1
             foreach (string tr in tranches)
             {
                 if (tranche == tr)
@@ -147,6 +180,7 @@ namespace Conservatoire.vue
                 }
                 existe = 1;
             }
+            // Si le jour rentré n'existe pas alors existe = 2
             foreach (string jr in jours)
             {
                 if (jr == jour)
@@ -157,6 +191,7 @@ namespace Conservatoire.vue
                 existe = 2;
             }
 
+            // En fonction du résultat modifie la séance ou affiche le message d'erreur correspondant
             switch (existe)
             {
                 case 0:
@@ -176,6 +211,11 @@ namespace Conservatoire.vue
             }
         }
 
+        /// <summary>
+        /// Rafraîchit la liste de séances
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button4_Click(object sender, EventArgs e)
         {
             seances = monManager.chargementSeancesProfBD(this.prof.Id);

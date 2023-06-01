@@ -10,6 +10,10 @@ namespace Conservatoire.modele
     {
         private string libelle;
 
+        /// <summary>
+        /// Crée un instrumet=nt
+        /// </summary>
+        /// <param name="unLibelle"></param>
         public Instrument(string unLibelle)
         {
             this.libelle = unLibelle;
